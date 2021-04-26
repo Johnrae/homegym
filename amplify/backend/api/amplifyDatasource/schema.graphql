@@ -1,0 +1,72 @@
+type EquipmentItem @model @auth(rules: [{allow: public}]) @key(name: "byEquipmentCategory", fields: ["equipmentcategoryID"]) {
+  id: ID!
+  name: String
+  weight: String
+  equipmentcategoryID: ID
+  color: String
+}
+
+type User @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  first_name: String
+  last_name: String
+  EquipmentCategories: [EquipmentCategory] @connection(keyName: "byUser", fields: ["id"])
+  WorkoutRecords: [WorkoutRecord] @connection(keyName: "byUser", fields: ["id"])
+  WorkoutPlans: [UserWorkoutPlan] @connection(keyName: "byUser", fields: ["id"])
+  email: AWSEmail
+}
+
+type Set @model @key(name: "byExerciseRecord", fields: ["exerciserecordID"]) @auth(rules: [{allow: public}]) {
+  id: ID!
+  reps: Int
+  weight: Int
+  exerciserecordID: ID
+}
+
+type EquipmentCategory @model @key(name: "byUser", fields: ["userID"]) @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String
+  type: String
+  userID: ID
+  EquipmentItems: [EquipmentItem] @connection(keyName: "byEquipmentCategory", fields: ["id"])
+}
+
+type WorkoutRecord @model @auth(rules: [{allow: public}]) @key(name: "byWorkoutPlan", fields: ["workoutplanID"]) @key(name: "byUser", fields: ["userID"]) {
+  id: ID!
+  ExerciseRecords: [ExerciseRecord] @connection(keyName: "byWorkoutRecord", fields: ["id"])
+  workoutplanID: ID
+  userID: ID
+}
+
+type WorkoutPlan @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  ExercisePlans: [ExercisePlan] @connection(keyName: "byWorkoutPlan", fields: ["id"])
+  WorkoutRecords: [WorkoutRecord] @connection(keyName: "byWorkoutPlan", fields: ["id"])
+  users: [UserWorkoutPlan] @connection(keyName: "byWorkoutPlan", fields: ["id"])
+}
+
+type ExerciseRecord @model @auth(rules: [{allow: public}]) @key(name: "byExercisePlan", fields: ["exerciseplanID"]) @key(name: "byWorkoutRecord", fields: ["workoutrecordID"]) {
+  id: ID!
+  Sets: [Set] @connection(keyName: "byExerciseRecord", fields: ["id"])
+  weight: Int
+  exerciseplanID: ID
+  workoutrecordID: ID
+}
+
+type ExercisePlan @model @key(name: "byWorkoutPlan", fields: ["workoutplanID"]) @auth(rules: [{allow: public}]) {
+  id: ID!
+  workoutplanID: ID
+  reps: Int
+  sets: Int
+  EqupmentCategory: EquipmentCategory @connection
+  ExerciseRecords: [ExerciseRecord] @connection(keyName: "byExercisePlan", fields: ["id"])
+  name: String
+}
+
+type UserWorkoutPlan @model(queries: null) @key(name: "byUser", fields: ["userID", "workoutplanID"]) @key(name: "byWorkoutPlan", fields: ["workoutplanID", "userID"]) @auth(rules: [{allow: public}, {allow: public}]) {
+  id: ID!
+  userID: ID!
+  workoutplanID: ID!
+  user: User! @connection(fields: ["userID"])
+  workoutplan: WorkoutPlan! @connection(fields: ["workoutplanID"])
+}
