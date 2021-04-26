@@ -3,6 +3,11 @@ import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import WorkoutIndex from './screens/WorkoutIndex'
 
+import Amplify from 'aws-amplify'
+import awsconfig from './aws-exports'
+
+Amplify.configure(awsconfig)
+
 export default function App() {
   return (
     <View style={styles.container}>
