@@ -1,10 +1,10 @@
 {
-  "projectName": "workout",
-  "version": "3.1",
-  "frontend": "javascript",
   "providers": [
     "awscloudformation"
   ],
+  "projectName": "HomeGym",
+  "version": "3.1",
+  "frontend": "javascript",
   "javascript": {
     "framework": "react-native",
     "config": {
