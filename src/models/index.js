@@ -4,12 +4,12 @@ import { schema } from './schema';
 
 
 
-const { EquipmentItem, User, EquipmentCategory, WorkoutRecord, ExerciseRecord, Set, UserWorkoutPlan, WorkoutPlan, ExercisePlan } = initSchema(schema);
+const { EquipmentItem, EquipmentCategory, User, WorkoutRecord, ExerciseRecord, Set, UserWorkoutPlan, WorkoutPlan, ExercisePlan } = initSchema(schema);
 
 export {
   EquipmentItem,
-  User,
   EquipmentCategory,
+  User,
   WorkoutRecord,
   ExerciseRecord,
   Set,

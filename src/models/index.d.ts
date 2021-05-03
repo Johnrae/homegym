@@ -10,8 +10,19 @@ export declare class EquipmentItem {
   readonly weight?: string;
   readonly equipmentcategoryID?: string;
   readonly color?: string;
+  readonly EquipmentCategory?: EquipmentCategory;
   constructor(init: ModelInit<EquipmentItem>);
   static copyOf(source: EquipmentItem, mutator: (draft: MutableModel<EquipmentItem>) => MutableModel<EquipmentItem> | void): EquipmentItem;
+}
+
+export declare class EquipmentCategory {
+  readonly id: string;
+  readonly name?: string;
+  readonly type?: string;
+  readonly userID?: string;
+  readonly EquipmentItems?: (EquipmentItem | null)[];
+  constructor(init: ModelInit<EquipmentCategory>);
+  static copyOf(source: EquipmentCategory, mutator: (draft: MutableModel<EquipmentCategory>) => MutableModel<EquipmentCategory> | void): EquipmentCategory;
 }
 
 export declare class User {
@@ -24,16 +35,6 @@ export declare class User {
   readonly email?: string;
   constructor(init: ModelInit<User>);
   static copyOf(source: User, mutator: (draft: MutableModel<User>) => MutableModel<User> | void): User;
-}
-
-export declare class EquipmentCategory {
-  readonly id: string;
-  readonly name?: string;
-  readonly type?: string;
-  readonly userID?: string;
-  readonly EquipmentItems?: (EquipmentItem | null)[];
-  constructor(init: ModelInit<EquipmentCategory>);
-  static copyOf(source: EquipmentCategory, mutator: (draft: MutableModel<EquipmentCategory>) => MutableModel<EquipmentCategory> | void): EquipmentCategory;
 }
 
 export declare class WorkoutRecord {
@@ -51,6 +52,7 @@ export declare class ExerciseRecord {
   readonly weight?: number;
   readonly exerciseplanID?: string;
   readonly workoutrecordID?: string;
+  readonly WorkoutRecord?: WorkoutRecord;
   constructor(init: ModelInit<ExerciseRecord>);
   static copyOf(source: ExerciseRecord, mutator: (draft: MutableModel<ExerciseRecord>) => MutableModel<ExerciseRecord> | void): ExerciseRecord;
 }
@@ -60,6 +62,7 @@ export declare class Set {
   readonly reps?: number;
   readonly weight?: number;
   readonly exerciserecordID?: string;
+  readonly ExerciseRecord?: ExerciseRecord;
   constructor(init: ModelInit<Set>);
   static copyOf(source: Set, mutator: (draft: MutableModel<Set>) => MutableModel<Set> | void): Set;
 }
@@ -77,6 +80,7 @@ export declare class WorkoutPlan {
   readonly ExercisePlans?: (ExercisePlan | null)[];
   readonly WorkoutRecords?: (WorkoutRecord | null)[];
   readonly users?: (UserWorkoutPlan | null)[];
+  readonly name?: string;
   constructor(init: ModelInit<WorkoutPlan>);
   static copyOf(source: WorkoutPlan, mutator: (draft: MutableModel<WorkoutPlan>) => MutableModel<WorkoutPlan> | void): WorkoutPlan;
 }

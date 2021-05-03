@@ -37,6 +37,19 @@ export const schema = {
                     "type": "String",
                     "isRequired": false,
                     "attributes": []
+                },
+                "EquipmentCategory": {
+                    "name": "EquipmentCategory",
+                    "isArray": false,
+                    "type": {
+                        "model": "EquipmentCategory"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "equipmentItemEquipmentCategoryId"
+                    }
                 }
             },
             "syncable": true,
@@ -52,6 +65,86 @@ export const schema = {
                         "name": "byEquipmentCategory",
                         "fields": [
                             "equipmentcategoryID"
+                        ]
+                    }
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "EquipmentCategory": {
+            "name": "EquipmentCategory",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "name": {
+                    "name": "name",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "type": {
+                    "name": "type",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "userID": {
+                    "name": "userID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "EquipmentItems": {
+                    "name": "EquipmentItems",
+                    "isArray": true,
+                    "type": {
+                        "model": "EquipmentItem"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "equipmentcategoryID"
+                    }
+                }
+            },
+            "syncable": true,
+            "pluralName": "EquipmentCategories",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byUser",
+                        "fields": [
+                            "userID"
                         ]
                     }
                 },
@@ -153,86 +246,6 @@ export const schema = {
                 {
                     "type": "model",
                     "properties": {}
-                },
-                {
-                    "type": "auth",
-                    "properties": {
-                        "rules": [
-                            {
-                                "allow": "public",
-                                "operations": [
-                                    "create",
-                                    "update",
-                                    "delete",
-                                    "read"
-                                ]
-                            }
-                        ]
-                    }
-                }
-            ]
-        },
-        "EquipmentCategory": {
-            "name": "EquipmentCategory",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "name": {
-                    "name": "name",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "type": {
-                    "name": "type",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "userID": {
-                    "name": "userID",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "EquipmentItems": {
-                    "name": "EquipmentItems",
-                    "isArray": true,
-                    "type": {
-                        "model": "EquipmentItem"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "equipmentcategoryID"
-                    }
-                }
-            },
-            "syncable": true,
-            "pluralName": "EquipmentCategories",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {}
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byUser",
-                        "fields": [
-                            "userID"
-                        ]
-                    }
                 },
                 {
                     "type": "auth",
@@ -378,6 +391,19 @@ export const schema = {
                     "type": "ID",
                     "isRequired": false,
                     "attributes": []
+                },
+                "WorkoutRecord": {
+                    "name": "WorkoutRecord",
+                    "isArray": false,
+                    "type": {
+                        "model": "WorkoutRecord"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "exerciseRecordWorkoutRecordId"
+                    }
                 }
             },
             "syncable": true,
@@ -453,6 +479,19 @@ export const schema = {
                     "type": "ID",
                     "isRequired": false,
                     "attributes": []
+                },
+                "ExerciseRecord": {
+                    "name": "ExerciseRecord",
+                    "isArray": false,
+                    "type": {
+                        "model": "ExerciseRecord"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "setExerciseRecordId"
+                    }
                 }
             },
             "syncable": true,
@@ -633,6 +672,13 @@ export const schema = {
                         "connectionType": "HAS_MANY",
                         "associatedWith": "workoutplan"
                     }
+                },
+                "name": {
+                    "name": "name",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
                 }
             },
             "syncable": true,
@@ -763,5 +809,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "e27c61aa42a7b90d4f2b789c1b5f9ec7"
+    "version": "3c901b54570db4d5d38a30cda79eca93"
 };
